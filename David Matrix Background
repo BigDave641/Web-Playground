@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <style>
+        
+            *{
+                padding: 0;
+                margin: 0;
+            }
+        
+            html {
+            	width: 100%;
+            	height: 100%;
+            	background: radial-gradient(circle, #fff 0%, #aaa 100%) no-repeat;
+            	overflow-x: hidden;
+            	overflow-y: hidden;
+            }
+            body {
+            	text-align: center;
+            	display: table;
+            	background: black;
+            	width: 100%;
+            	height: 100%;
+            	overflow-x: hidden;
+            	overflow-y: hidden;
+            }
+
+            canvas {display:block;}
+          
+            span {
+            	font-family: monospace;
+            	font-size: 1.5em;
+            }
+            
+            @keyframes cursor {
+            	0% {
+            		opacity: 0;
+            	}
+            	40% {
+            		opacity: 1;
+            	}
+            	50% {
+            		opacity: 1;
+            	}
+            	90% {
+            		opacity: 1;
+            	}
+            	100% {
+            		opacity: 0;
+            	}
+            }
+        
+        </style>
+    </head>
+    <body>
+    
+        <canvas id="c"></canvas>
+        
+        <script>
+     
+        var c = document.getElementById("c");
+        var ctx = c.getContext("2d");
+
+        c.height = window.innerHeight;
+        c.width = window.innerWidth;
+
+        var matrix = "davidDAVID∂@√!∂Дэвидܕܘܝܕⲇⲁⲩⲉⲓⲇ大衛ديفيدדווידδαυιδ";
+        matrix = matrix.split("");
+
+        var font_size = 9;
+        var columns = c.width / font_size; 
+        var drops = [];
+       
+        for(var x = 0; x < columns; x++)
+            drops[x] = 1; 
+
+        function draw()
+        {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            ctx.fillStyle = "#0F0";
+            ctx.font = font_size + "px helvetica";
+     
+            for( var i = 0; i < drops.length; i++ )
+            {
+                var text = matrix[ Math.floor( Math.random() * matrix.length ) ];
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+                if( drops[i] * font_size > c.height && Math.random() > 0.98 )
+                    drops[i] = 0;
+
+                drops[i]++;
+            }
+        }
+
+        setInterval( draw, 40 );
+
+        </script>
+    </body>
+</html>
